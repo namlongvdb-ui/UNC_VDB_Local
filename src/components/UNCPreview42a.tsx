@@ -6,8 +6,8 @@ interface UNCPreview42aProps {
 }
 
 const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
-  const val = (v: string, len = 30) =>
-    v || <span className="text-gray-300">{"·".repeat(len)}</span>;
+  const dots = (len: number) => ".".repeat(len);
+  const field = (v: string, len = 30) => v || dots(len);
 
   return (
     <div
@@ -18,92 +18,93 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         {/* Mẫu số */}
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
 
-        {/* Title */}
-        <div className="text-center -mt-0.5">
-          <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
-        </div>
-
-        {/* Số UNC on top right */}
-        <div className="text-right -mt-5 text-[13px]">
-          Số UNC: {val(data.soUNC, 12)}
-        </div>
-
-        {/* Logo + subtitle + date */}
-        <div className="flex items-start mt-1">
-          <div className="w-[75px] flex flex-col items-center">
-            <img src={vdbLogo} alt="VDB" className="w-[56px] h-[56px] object-contain" />
-            <span className="text-[8px] italic text-gray-400">Biểu tượng</span>
+        {/* Title row: Logo + Title + Số UNC */}
+        <div className="flex items-start -mt-1">
+          {/* Logo - aligned with title */}
+          <div className="w-[80px] flex items-center justify-center">
+            <img src={vdbLogo} alt="VDB" className="w-[65px] h-[65px] object-contain" />
           </div>
-          <div className="flex-1 text-center">
-            <p className="text-[13px]">Chuyển khoản, chuyển tiền thư, điện</p>
-            <p className="text-[13px] mt-1.5">
-              Lập ngày: {val(data.ngay, 6)} tháng {val(data.thang, 6)} năm {val(data.nam, 8)}
+          {/* Center: title + subtitle + date */}
+          <div className="flex-1 text-center pt-0.5">
+            <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
+            <p className="text-[13px] mt-0.5">Chuyển khoản, chuyển tiền thư, điện</p>
+            <p className="text-[13px] mt-1">
+              Lập ngày: {field(data.ngay, 8)} tháng {field(data.thang, 8)} năm {field(data.nam, 8)}
             </p>
           </div>
-          <div className="w-[75px]" />
+          {/* Số UNC */}
+          <div className="text-[13px] pt-1 w-[120px] text-right">
+            Số UNC: {field(data.soUNC, 12)}
+          </div>
         </div>
 
         {/* Main body */}
         <div className="flex mt-2">
-          {/* Left: all fields in one bordered block */}
+          {/* Left fields block - one continuous bordered block */}
           <div className="flex-1 border border-black">
-            <div className="border-b border-black px-2 py-[4px]">
-              Đơn vị trả tiền: {val(data.donViTraTien, 55)}
+            {/* Đơn vị trả tiền group */}
+            <div className="border-b border-black px-2 py-[3px]">
+              Đơn vị trả tiền:{field(data.donViTraTien, 58)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Số tài khoản: {val(data.soTaiKhoanTra, 60)}
+            <div className="border-b border-black px-2 py-[3px]">
+              Số tài khoản:{field(data.soTaiKhoanTra, 62)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Tại NHPT tỉnh, TP: {val(data.taiNHPT, 50)}
+            <div className="border-b border-black px-2 py-[3px]">
+              Tại NHPT tỉnh, TP:{field(data.taiNHPT, 54)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Đơn vị nhận tiền: {val(data.donViNhanTien, 53)}
+
+            {/* Separator - thicker or double */}
+            {/* Đơn vị nhận tiền group */}
+            <div className="border-b border-black px-2 py-[3px]">
+              Đơn vị nhận tiền:{field(data.donViNhanTien, 56)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Số tài khoản: {val(data.soTaiKhoanNhan, 60)}
+            <div className="border-b border-black px-2 py-[3px]">
+              Số tài khoản:{field(data.soTaiKhoanNhan, 62)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Tại NH, KB: {val(data.taiNHKB, 25)}{"  "},tỉnh, TP: {val(data.tinhTP, 20)}
+            <div className="border-b border-black px-2 py-[3px]">
+              Tại NH, KB:{field(data.taiNHKB, 28)},tỉnh, TP:{field(data.tinhTP, 22)}
             </div>
-            <div className="border-b border-black px-2 py-[4px]">
-              Số tiền bằng chữ: {val(data.soTienBangChu, 53)}
+
+            {/* Số tiền & Nội dung */}
+            <div className="border-b border-black px-2 py-[3px]">
+              Số tiền bằng chữ:{field(data.soTienBangChu, 56)}
             </div>
-            <div className="px-2 py-[4px]">
-              Nội dung thanh toán: {val(data.noiDungThanhToan, 49)}
+            <div className="px-2 py-[3px]">
+              Nội dung thanh toán:{field(data.noiDungThanhToan, 52)}
             </div>
           </div>
 
-          {/* Right: stacked boxes */}
+          {/* Right panel - stacked boxes sharing border with left */}
           <div className="w-[155px] border-t border-r border-b border-black ml-[-1px]">
             {/* NHPT GHI */}
             <div className="border-b border-black px-2 py-1.5">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
               <p className="text-center text-[11px] mt-0.5">
-                {"·".repeat(5)}/{"·".repeat(5)}/{"·".repeat(7)}
+                {dots(5)}/{dots(5)}/{dots(7)}
               </p>
-              <p className="text-[11px] mt-1">Nợ:{"·".repeat(20)}</p>
-              <p className="text-[11px] mt-0.5">Có:{"·".repeat(20)}</p>
+              <p className="text-[11px] mt-1">Nợ:{dots(20)}</p>
+              <p className="text-[11px] mt-0.5">Có:{dots(20)}</p>
             </div>
             {/* NH (KBNN) GHI */}
             <div className="border-b border-black px-2 py-1.5">
               <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
-              <p className="text-[11px] mt-1">Nợ:{"·".repeat(20)}</p>
-              <p className="text-[11px] mt-0.5">Có:{"·".repeat(20)}</p>
+              <p className="text-[11px] mt-1">Nợ:{dots(20)}</p>
+              <p className="text-[11px] mt-0.5">Có:{dots(20)}</p>
             </div>
             {/* SỐ TIỀN BẰNG SỐ */}
             <div className="px-2 py-1.5">
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
-                {data.soTienBangSo || <span className="text-gray-300">*{"·".repeat(16)}*</span>}
+                {data.soTienBangSo || <span>*{dots(16)}*</span>}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Signature section - bordered */}
-        <div className="flex border border-black border-t-0">
+        {/* Signature row 1: Đơn vị trả tiền + Ngân hàng Phát triển */}
+        <div className="flex border-t border-black">
           {/* Đơn vị trả tiền */}
-          <div className="flex-1 border-r border-black px-2 py-1.5">
+          <div className="flex-1 border-r border-black py-1.5 px-2">
             <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
             <div className="flex justify-around mt-0.5">
               <div className="text-center">
@@ -119,12 +120,12 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
           </div>
           {/* Ngân hàng Phát triển */}
-          <div className="flex-1 px-2 py-1.5">
+          <div className="flex-1 py-1.5 px-2">
             <p className="font-bold text-[12px] text-center">Ngân hàng Phát triển</p>
             <p className="text-[10px] text-center">Đề nghị NH (KBNN) thanh toán UNC này</p>
-            <p className="text-[10px] text-center">từ tài khoản số {"·".repeat(28)}</p>
+            <p className="text-[10px] text-center">từ tài khoản số {dots(28)}</p>
             <p className="text-[10px] text-center">
-              Ngày{"·".repeat(6)}tháng{"·".repeat(4)} năm {"·".repeat(8)}
+              Ngày{dots(6)}tháng{dots(5)} năm {dots(8)}
             </p>
             <div className="flex justify-around mt-0.5">
               <div className="text-center">
@@ -144,7 +145,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         {/* NH KBNN A + B */}
         <div className="flex mt-8">
           <div className="flex-1">
-            <p className="font-bold text-[11px] text-center">NH, (KBNN) A ghi sổ ngày {"·".repeat(8)}</p>
+            <p className="font-bold text-[11px] text-center">NH, (KBNN) A ghi sổ ngày {dots(8)}</p>
             <div className="flex justify-around mt-0.5">
               <div className="text-center">
                 <p className="font-bold text-[11px]">Kế toán</p>
@@ -159,7 +160,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
           </div>
           <div className="flex-1">
-            <p className="font-bold text-[11px] text-center">NH, (KBNN) B ghi sổ ngày {"·".repeat(8)}</p>
+            <p className="font-bold text-[11px] text-center">NH, (KBNN) B ghi sổ ngày {dots(8)}</p>
             <div className="flex justify-around mt-0.5">
               <div className="text-center">
                 <p className="font-bold text-[11px]">Kế toán</p>
