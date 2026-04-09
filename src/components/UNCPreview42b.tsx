@@ -22,7 +22,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
 
         {/* Title row */}
         <div className="flex items-start">
-          <div className="w-[70px]" />
+          <div className="w-[80px]" />
           <div className="flex-1 text-center -mt-1">
             <h1 className="text-[17px] font-bold tracking-[3px] mb-0.5">ỦY NHIỆM CHI</h1>
           </div>
@@ -33,9 +33,8 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
 
         {/* Subtitle + date with logo */}
         <div className="flex items-start mt-0">
-          <div className="w-[70px] flex flex-col items-center">
-            <img src={vdbLogo} alt="VDB" className="w-[44px] h-[44px] object-contain" />
-            <span className="text-[8px] italic text-gray-500 mt-0.5">Biểu tượng</span>
+          <div className="w-[80px] flex flex-col items-center">
+            <img src={vdbLogo} alt="VDB" className="w-[60px] h-[60px] object-contain" />
           </div>
           <div className="flex-1 text-center">
             <p className="text-[13px]">Chuyển khoản, chuyển tiền thư, điện</p>
@@ -92,9 +91,9 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             </div>
 
             {/* Signatures */}
-            <div className="flex border border-black mt-[-1px]">
+            <div className="flex mt-4">
               {/* Đơn vị trả tiền */}
-              <div className="flex-1 border-r border-black p-2">
+              <div className="flex-1 pr-3">
                 <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
                 <div className="flex justify-around mt-1">
                   <div className="text-center">
@@ -110,7 +109,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
                 </div>
               </div>
               {/* Ngân hàng Phát triển */}
-              <div className="flex-1 p-2">
+              <div className="flex-1 pl-3">
                 <p className="font-bold text-[12px] text-center">Ngân hàng Phát triển</p>
                 <div className="flex justify-around mt-1">
                   <div className="text-center">
