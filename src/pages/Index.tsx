@@ -65,18 +65,20 @@ const Index = () => {
         </div>
 
         {/* Right: Preview */}
-        <div className="flex-1 h-[calc(100vh-52px)] overflow-auto p-6 print:p-0 print:h-auto print:overflow-visible">
-          <div className="print:hidden text-center mb-3">
+        <div className="flex-1 h-[calc(100vh-52px)] overflow-auto bg-muted/50 print:p-0 print:h-auto print:overflow-visible print:bg-white">
+          <div className="print:hidden text-center py-3">
             <span className="text-xs text-muted-foreground uppercase tracking-wider">
               Xem trước biểu mẫu — {activeTab === "42a" ? "C42a-NHPT (Doanh nghiệp)" : "C42b-NHPT (Nội bộ đơn vị)"}
             </span>
           </div>
-          <div className="flex justify-center">
-            {activeTab === "42a" ? (
-              <UNCPreview42a data={data} />
-            ) : (
-              <UNCPreview42b data={data} />
-            )}
+          <div className="flex justify-center pb-8 print:pb-0">
+            <div className="origin-top" style={{ transform: "scale(0.75)" }}>
+              {activeTab === "42a" ? (
+                <UNCPreview42a data={data} />
+              ) : (
+                <UNCPreview42b data={data} />
+              )}
+            </div>
           </div>
         </div>
       </div>
