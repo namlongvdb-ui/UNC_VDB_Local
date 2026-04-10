@@ -12,14 +12,17 @@ const Dots = () => (
 );
 
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-start`}>
-    <span className="whitespace-nowrap flex-shrink-0">{label}</span>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px]`}>
     {value ? (
-      <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word', display: 'block' }}>
-        {value}
-      </span>
+      <div style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+        <span className="whitespace-nowrap">{label}</span>
+        <span className="ml-[2px] font-medium">{value}</span>
+      </div>
     ) : (
-      <Dots />
+      <div className="flex items-start">
+        <span className="whitespace-nowrap flex-shrink-0">{label}</span>
+        <Dots />
+      </div>
     )}
   </div>
 );
@@ -79,12 +82,17 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
-            <div className="px-2 py-[6px] flex items-start">
-              <span className="whitespace-nowrap flex-shrink-0">Nội dung thanh toán:</span>
+            <div className="px-2 py-[6px]">
               {data.noiDungThanhToan ? (
-                <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word', display: 'block' }}>{data.noiDungThanhToan}</span>
+                <div style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                  <span className="whitespace-nowrap">Nội dung thanh toán:</span>
+                  <span className="ml-[2px] font-medium">{data.noiDungThanhToan}</span>
+                </div>
               ) : (
-                <Dots />
+                <div className="flex items-start">
+                  <span className="whitespace-nowrap flex-shrink-0">Nội dung thanh toán:</span>
+                  <Dots />
+                </div>
               )}
             </div>
           </div>
