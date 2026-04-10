@@ -47,7 +47,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
             <p className="text-[13px] mt-0.5">Chuyển khoản, chuyển tiền thư, điện</p>
             <p className="text-[13px] mt-1">
-              Lập ngày: <span className="inline-block w-[40px] border-b border-dotted border-black text-center">{data.ngay}</span> tháng <span className="inline-block w-[40px] border-b border-dotted border-black text-center">{data.thang}</span> năm <span className="inline-block w-[50px] border-b border-dotted border-black text-center">{data.nam}</span>
+              Lập ngày: <span className="inline-block w-[40px] text-center">{data.ngay}</span> tháng <span className="inline-block w-[40px] text-center">{data.thang}</span> năm <span className="inline-block w-[50px] text-center">{data.nam}</span>
             </p>
           </div>
           <div className="text-[13px] pt-1 w-[130px] text-right">
