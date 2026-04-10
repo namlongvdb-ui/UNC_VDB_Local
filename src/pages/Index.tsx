@@ -42,24 +42,27 @@ const Index = () => {
   const handleExportPDF = async () => {
     if (!previewRef.current) return;
     const el = previewRef.current;
-    
-    // Temporarily reset transform for accurate capture
-    const wrapper = el.parentElement;
-    const originalTransform = wrapper?.style.transform || '';
-    if (wrapper) wrapper.style.transform = 'none';
-    
-    const canvas = await html2canvas(el, {
+
+    // Clone element off-screen to avoid visual flash
+    const clone = el.cloneNode(true) as HTMLElement;
+    clone.style.position = 'fixed';
+    clone.style.left = '-9999px';
+    clone.style.top = '0';
+    clone.style.transform = 'none';
+    clone.style.zIndex = '-1';
+    document.body.appendChild(clone);
+
+    const canvas = await html2canvas(clone, {
       scale: 3,
       useCORS: true,
       backgroundColor: "#ffffff",
       logging: false,
-      windowWidth: el.scrollWidth,
-      windowHeight: el.scrollHeight,
+      windowWidth: clone.scrollWidth,
+      windowHeight: clone.scrollHeight,
     });
-    
-    // Restore transform
-    if (wrapper) wrapper.style.transform = originalTransform;
-    
+
+    document.body.removeChild(clone);
+
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = 210;
