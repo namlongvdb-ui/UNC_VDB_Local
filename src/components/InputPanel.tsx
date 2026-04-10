@@ -66,6 +66,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
   const [beneficiaries, setBeneficiaries] = useState<SavedBeneficiary[]>([]);
   const [history, setHistory] = useState<UNCHistoryEntry[]>([]);
   const [showBeneficiaries, setShowBeneficiaries] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
@@ -112,6 +113,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
       taiNHKB: b.taiNHKB,
       tinhTP: b.tinhTP,
     });
+    setSheetOpen(false);
   };
 
   const handleDeleteBeneficiary = (id: string) => {
@@ -226,7 +228,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
               >
                 <UserPlus className="w-3 h-3" /> Lưu
               </button>
-              <Sheet>
+              <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger asChild>
                   <button
                     type="button"
