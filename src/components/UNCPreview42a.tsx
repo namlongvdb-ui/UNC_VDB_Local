@@ -74,7 +74,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
                 {data.tinhTP && <span className="font-medium">{data.tinhTP}</span>}
               </span>
             </div>
-            <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} />
+            <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
             <div className="px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
