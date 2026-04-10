@@ -65,13 +65,13 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
               <p className="text-center text-[11px] mt-1">
                 {dots(5)}/{dots(5)}/{dots(7)}
               </p>
-              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
-              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
+              <p className="text-[11px] mt-1.5 overflow-hidden whitespace-nowrap">Nợ:{dots(80)}</p>
+              <p className="text-[11px] mt-1 overflow-hidden whitespace-nowrap">Có:{dots(80)}</p>
             </div>
             <div className="border-b border-black px-2 py-[6px] flex-1 flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
-              <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
-              <p className="text-[11px] mt-1">Có:{dots(20)}</p>
+              <p className="text-[11px] mt-1.5 overflow-hidden whitespace-nowrap">Nợ:{dots(80)}</p>
+              <p className="text-[11px] mt-1 overflow-hidden whitespace-nowrap">Có:{dots(80)}</p>
             </div>
             <div className="px-2 py-[6px] flex-1 flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
