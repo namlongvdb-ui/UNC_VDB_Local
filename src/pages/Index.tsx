@@ -8,11 +8,12 @@ import { Printer, FileDown } from "lucide-react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+const today = new Date();
 const initialData: UNCFormData = {
   soUNC: "",
-  ngay: "",
-  thang: "",
-  nam: "",
+  ngay: String(today.getDate()).padStart(2, "0"),
+  thang: String(today.getMonth() + 1).padStart(2, "0"),
+  nam: String(today.getFullYear()),
   donViTraTien: "",
   soTaiKhoanTra: "",
   taiNHPT: "",
