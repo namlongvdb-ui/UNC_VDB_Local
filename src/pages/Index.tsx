@@ -43,7 +43,6 @@ const Index = () => {
     if (!previewRef.current) return;
     const el = previewRef.current;
 
-    // Clone element off-screen with explicit A4 dimensions
     const clone = el.cloneNode(true) as HTMLElement;
     clone.style.position = 'fixed';
     clone.style.left = '-9999px';
@@ -78,7 +77,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-muted print:bg-white print:p-0">
-      {/* Header */}
       <header className="bg-primary text-primary-foreground px-6 py-3 flex flex-col items-center print:hidden">
         <div className="text-center">
           <h1 className="text-lg font-bold uppercase">ỦY NHIỆM CHI - VDB</h1>
@@ -99,22 +97,20 @@ const Index = () => {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-        <div className="flex items-center gap-2">
-          <Button onClick={handleExportPDF} variant="secondary" size="sm" className="gap-2">
-            <FileDown className="w-4 h-4" />
-            Xuất PDF
-          </Button>
-          <Button onClick={handlePrint} variant="secondary" size="sm" className="gap-2">
-            <Printer className="w-4 h-4" />
-            In biểu mẫu
-          </Button>
-        </div>
+          <div className="flex items-center gap-2">
+            <Button onClick={handleExportPDF} variant="secondary" size="sm" className="gap-2">
+              <FileDown className="w-4 h-4" />
+              Xuất PDF
+            </Button>
+            <Button onClick={handlePrint} variant="secondary" size="sm" className="gap-2">
+              <Printer className="w-4 h-4" />
+              In biểu mẫu
+            </Button>
+          </div>
         </div>
       </header>
 
-      {/* Split layout */}
       <div className="flex print:block">
-        {/* Left: Input */}
         <div className="w-[380px] min-w-[380px] h-[calc(100vh-52px)] overflow-y-auto border-r border-border bg-background p-5 print:hidden">
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
             Nhập thông tin
@@ -122,7 +118,6 @@ const Index = () => {
           <InputPanel data={data} onChange={setData} activeTab={activeTab} />
         </div>
 
-        {/* Right: Preview */}
         <div className="flex-1 h-[calc(100vh-52px)] overflow-auto bg-muted/50 print:p-0 print:h-auto print:overflow-visible print:bg-white">
           <div className="print:hidden text-center py-3">
             <span className="text-xs text-muted-foreground uppercase tracking-wider">

@@ -37,10 +37,8 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
       style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
       <div className="px-[15mm] py-[10mm] h-full flex flex-col">
-        {/* Mẫu số */}
         <div className="text-right text-[11px] italic">Mẫu số: C42b-NHPT</div>
 
-        {/* Title row */}
         <div className="flex items-start -mt-1">
           <div className="w-[80px] ml-[5mm] flex items-center justify-center">
             <img src={vdbLogo} alt="VDB" className="w-[80px] h-[80px] object-contain" />
@@ -57,9 +55,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
           </div>
         </div>
 
-        {/* Main body */}
         <div className="relative mt-2">
-          {/* Right panel - fixed size */}
           <div className="absolute top-0 right-0 w-[170px] h-[240px] border border-black" style={{ zIndex: 1 }}>
             <div className="border-b border-black px-3 py-[8px] flex flex-col justify-center" style={{ height: '50%' }}>
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
@@ -76,7 +72,6 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               </p>
             </div>
           </div>
-          {/* Left fields */}
           <div className="min-w-0 overflow-hidden" style={{ marginRight: '175px' }}>
             <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
@@ -114,7 +109,6 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
           </div>
         </div>
 
-        {/* Signatures */}
         <div className="flex">
           <div className="flex-1 border-r border-black py-2 px-2">
             <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>

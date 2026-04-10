@@ -31,14 +31,12 @@ function readGroup(n: number): string {
 const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ', 'triệu tỷ'];
 
 export function numberToVietnameseWords(n: number | string): string {
-  // Remove non-digit chars
   const str = String(n).replace(/[^0-9]/g, '');
   if (!str || str === '0') return '';
 
   const num = BigInt(str);
   if (num === 0n) return 'không đồng';
 
-  // Split into groups of 3 from right
   const groups: number[] = [];
   let temp = str;
   while (temp.length > 0) {
@@ -57,7 +55,6 @@ export function numberToVietnameseWords(n: number | string): string {
   }
 
   const result = parts.join(' ');
-  // Capitalize first letter
   return result.charAt(0).toUpperCase() + result.slice(1) + ' đồng';
 }
 
