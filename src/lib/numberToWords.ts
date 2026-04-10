@@ -60,3 +60,9 @@ export function numberToVietnameseWords(n: number | string): string {
   // Capitalize first letter
   return result.charAt(0).toUpperCase() + result.slice(1) + ' đồng';
 }
+
+export function formatNumber(value: string): string {
+  const digits = value.replace(/[^0-9]/g, '');
+  if (!digits) return '';
+  return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}

@@ -1,4 +1,5 @@
 import vdbLogo from "@/assets/vdb-logo.jpg";
+import { formatNumber } from "@/lib/numberToWords";
 import type { UNCFormData } from "./InputPanel";
 
 interface UNCPreview42bProps {
@@ -71,7 +72,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
             <div className="px-3 py-[4px] flex flex-col justify-center" style={{ height: '50%' }}>
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[18px]">
-                {data.soTienBangSo || <span>{dots(18)}</span>}
+                {formatNumber(data.soTienBangSo) || <span>{dots(18)}</span>}
               </p>
             </div>
           </div>

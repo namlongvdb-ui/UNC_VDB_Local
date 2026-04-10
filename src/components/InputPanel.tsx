@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatNumber } from "@/lib/numberToWords";
 import { numberToVietnameseWords } from "@/lib/numberToWords";
 
 export interface UNCFormData {
@@ -158,10 +159,9 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         </h3>
         <div>
           <label className={labelClass}>Số tiền bằng số</label>
-          <input className={`${inputClass} text-lg font-bold`} placeholder="0" value={data.soTienBangSo} onChange={(e) => {
-            const val = e.target.value;
-            update("soTienBangSo", val);
-            onChange({ ...data, soTienBangSo: val, soTienBangChu: numberToVietnameseWords(val) });
+          <input className={`${inputClass} text-lg font-bold`} placeholder="0" value={formatNumber(data.soTienBangSo)} onChange={(e) => {
+            const raw = e.target.value.replace(/\./g, '');
+            onChange({ ...data, soTienBangSo: raw, soTienBangChu: numberToVietnameseWords(raw) });
           }} />
         </div>
         <div>
