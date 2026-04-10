@@ -65,8 +65,8 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
               <p className="text-center text-[11px] mt-2">
                 {dots(6)}/{dots(6)}/{dots(10)}
               </p>
-              <p className="text-[11px] mt-1.5 overflow-hidden whitespace-nowrap">Nợ:{dots(80)}</p>
-              <p className="text-[11px] mt-1.5 overflow-hidden whitespace-nowrap">Có:{dots(80)}</p>
+              <div className="flex items-baseline text-[11px] mt-1.5"><span className="flex-shrink-0">Nợ:</span><span className="flex-1 overflow-hidden whitespace-nowrap" style={{ letterSpacing: '1px' }}>{dots(80)}</span></div>
+              <div className="flex items-baseline text-[11px] mt-1.5"><span className="flex-shrink-0">Có:</span><span className="flex-1 overflow-hidden whitespace-nowrap" style={{ letterSpacing: '1px' }}>{dots(80)}</span></div>
             </div>
             <div className="px-3 py-[4px] flex flex-col justify-center" style={{ height: '50%' }}>
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
