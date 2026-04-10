@@ -59,7 +59,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         {/* Main body */}
         <div className="relative mt-2">
           {/* Right panel - fixed size */}
-          <div className="absolute top-0 right-0 w-[155px] h-[300px] border border-black" style={{ zIndex: 1 }}>
+          <div className="absolute top-0 right-0 w-[155px] border border-black" style={{ zIndex: 1 }}>
             <div className="border-b border-black px-2 py-[6px]">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
               <p className="text-center text-[11px] mt-1">
@@ -68,12 +68,12 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
               <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
               <p className="text-[11px] mt-1">Có:{dots(20)}</p>
             </div>
-            <div className="border-b border-black px-2 py-[6px]">
+            <div className="border-b border-black px-2 py-[6px]" style={{ height: '260px', boxSizing: 'border-box' }}>
               <p className="font-bold text-center text-[12px]">NH (KBNN) GHI:</p>
               <p className="text-[11px] mt-1.5">Nợ:{dots(20)}</p>
               <p className="text-[11px] mt-1">Có:{dots(20)}</p>
             </div>
-            <div className="px-2 py-[6px]">
+            <div className="px-2 py-[6px]" style={{ height: '260px', boxSizing: 'border-box' }}>
               <p className="font-bold text-center text-[12px]">SỐ TIỀN BẰNG SỐ</p>
               <p className="text-center text-[14px] font-bold mt-1 min-h-[22px]">
                 {data.soTienBangSo || <span>{dots(18)}</span>}
