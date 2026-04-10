@@ -129,6 +129,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
 
   const handleLoadHistory = (entry: UNCHistoryEntry) => {
     onChange(entry.data);
+    setHistorySheetOpen(false);
   };
 
   const handleDeleteHistory = (id: string) => {
