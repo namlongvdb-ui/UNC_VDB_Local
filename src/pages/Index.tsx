@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import InputPanel, { type UNCFormData } from "@/components/InputPanel";
 import UNCPreview42a from "@/components/UNCPreview42a";
 import UNCPreview42b from "@/components/UNCPreview42b";
-import { Printer } from "lucide-react";
+import { Printer, FileDown } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const initialData: UNCFormData = {
   soUNC: "",
@@ -27,12 +29,30 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("42a");
   const [data42a, setData42a] = useState<UNCFormData>(initialData);
   const [data42b, setData42b] = useState<UNCFormData>(initialData);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   const data = activeTab === "42a" ? data42a : data42b;
   const setData = activeTab === "42a" ? setData42a : setData42b;
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleExportPDF = async () => {
+    if (!previewRef.current) return;
+    const el = previewRef.current;
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = 210;
+    const pdfHeight = 297;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
+    pdf.save(fileName);
   };
 
   return (
@@ -52,10 +72,16 @@ const Index = () => {
             </TabsList>
           </Tabs>
         </div>
-        <Button onClick={handlePrint} variant="secondary" size="sm" className="gap-2">
-          <Printer className="w-4 h-4" />
-          In biểu mẫu
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={handleExportPDF} variant="secondary" size="sm" className="gap-2">
+            <FileDown className="w-4 h-4" />
+            Xuất PDF
+          </Button>
+          <Button onClick={handlePrint} variant="secondary" size="sm" className="gap-2">
+            <Printer className="w-4 h-4" />
+            In biểu mẫu
+          </Button>
+        </div>
       </header>
 
       {/* Split layout */}
@@ -77,11 +103,13 @@ const Index = () => {
           </div>
           <div className="flex justify-center pb-8 print:pb-0">
             <div className="origin-top" style={{ transform: "scale(0.75)" }}>
-              {activeTab === "42a" ? (
-                <UNCPreview42a data={data} />
-              ) : (
-                <UNCPreview42b data={data} />
-              )}
+              <div ref={previewRef}>
+                {activeTab === "42a" ? (
+                  <UNCPreview42a data={data} />
+                ) : (
+                  <UNCPreview42b data={data} />
+                )}
+              </div>
             </div>
           </div>
         </div>
