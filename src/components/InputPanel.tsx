@@ -68,6 +68,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
   const [showBeneficiaries, setShowBeneficiaries] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [historySheetOpen, setHistorySheetOpen] = useState(false);
 
   useEffect(() => {
     if (activeTab === "42b") {
@@ -128,6 +129,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
 
   const handleLoadHistory = (entry: UNCHistoryEntry) => {
     onChange(entry.data);
+    setHistorySheetOpen(false);
   };
 
   const handleDeleteHistory = (id: string) => {
@@ -160,6 +162,63 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
             >
               <Save className="w-4 h-4" />
             </button>
+            <Sheet open={historySheetOpen} onOpenChange={setHistorySheetOpen}>
+              <SheetTrigger asChild>
+                <button
+                  type="button"
+                  className="rounded-md bg-accent text-accent-foreground px-3 py-2 text-sm font-medium hover:bg-accent/80 transition-colors flex items-center gap-1"
+                  title="Lịch sử UNC"
+                >
+                  <Clock className="w-4 h-4" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[360px] sm:w-[420px] flex flex-col overflow-hidden">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-primary" />
+                    Lịch sử UNC ({history.length})
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex-1 overflow-y-auto mt-4 -mx-2">
+                  {history.length === 0 ? (
+                    <p className="text-sm text-muted-foreground italic text-center py-8">Chưa có lịch sử UNC.</p>
+                  ) : (
+                    <div className="space-y-2 px-2">
+                      {history.map((entry) => (
+                        <div
+                          key={entry.id}
+                          className="group rounded-lg border border-border bg-card p-3 hover:border-primary/40 hover:shadow-sm transition-all cursor-pointer"
+                          onClick={() => handleLoadHistory(entry)}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-sm">UNC #{entry.soUNC || "---"}</span>
+                                <span className="text-xs text-muted-foreground">{formatDate(entry.createdAt)}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
+                                <div>{entry.donViNhanTien || "—"}</div>
+                                <div className="font-medium text-foreground">{formatNumber(entry.soTienBangSo)}đ</div>
+                                {entry.noiDungThanhToan && (
+                                  <div className="italic truncate">{entry.noiDungThanhToan}</div>
+                                )}
+                              </div>
+                            </div>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleDeleteHistory(entry.id); }}
+                              className="opacity-0 group-hover:opacity-100 text-destructive hover:text-destructive/80 transition-opacity p-1 rounded hover:bg-destructive/10"
+                              title="Xóa"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </>
       )}
@@ -330,65 +389,6 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         </div>
       </div>
 
-      {/* Lịch sử UNC - only 42b */}
-      {activeTab === "42b" && (
-        <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-          <button
-            type="button"
-            onClick={() => setShowHistory(!showHistory)}
-            className="flex items-center justify-between w-full text-left"
-          >
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide flex items-center gap-2">
-              <Clock className="w-4 h-4" /> Lịch sử UNC ({history.length})
-            </h3>
-            {showHistory ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
-          </button>
-
-          {showHistory && (
-            <div className="max-h-[300px] overflow-y-auto space-y-0 rounded-md border border-border">
-              {history.length === 0 ? (
-                <p className="text-xs text-muted-foreground italic p-3">Chưa có lịch sử UNC.</p>
-              ) : (
-                history.map((entry) => (
-                  <div
-                    key={entry.id}
-                    className="flex items-center justify-between px-3 py-2 hover:bg-muted border-b border-border last:border-b-0 text-xs"
-                  >
-                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => handleLoadHistory(entry)}>
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">UNC #{entry.soUNC || "---"}</span>
-                        <span className="text-muted-foreground">{formatDate(entry.createdAt)}</span>
-                      </div>
-                      <div className="text-muted-foreground truncate">
-                        {entry.donViNhanTien} — {formatNumber(entry.soTienBangSo)}đ
-                      </div>
-                      {entry.noiDungThanhToan && (
-                        <div className="text-muted-foreground truncate italic">{entry.noiDungThanhToan}</div>
-                      )}
-                    </div>
-                    <div className="flex gap-1 ml-2 flex-shrink-0">
-                      <button
-                        onClick={() => handleLoadHistory(entry)}
-                        className="text-primary hover:text-primary/80"
-                        title="Tải lại"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteHistory(entry.id)}
-                        className="text-destructive hover:text-destructive/80"
-                        title="Xóa"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
