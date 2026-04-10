@@ -12,10 +12,10 @@ const Dots = () => (
 );
 
 const Row = ({ label, value, noBorder }: { label: string; value: string; noBorder?: boolean }) => (
-  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex`}>
+  <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex items-start`}>
     <span className="whitespace-nowrap flex-shrink-0">{label}</span>
     {value ? (
-      <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+      <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word', display: 'block' }}>
         {value}
       </span>
     ) : (
@@ -79,10 +79,10 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
-            <div className="px-2 py-[6px] flex">
+            <div className="px-2 py-[6px] flex items-start">
               <span className="whitespace-nowrap flex-shrink-0">Nội dung thanh toán:</span>
               {data.noiDungThanhToan ? (
-                <span className="ml-[2px] font-medium flex-1" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>{data.noiDungThanhToan}</span>
+                <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word', display: 'block' }}>{data.noiDungThanhToan}</span>
               ) : (
                 <Dots />
               )}
