@@ -228,7 +228,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
               >
                 <UserPlus className="w-3 h-3" /> Lưu
               </button>
-              <Sheet>
+              <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger asChild>
                   <button
                     type="button"
