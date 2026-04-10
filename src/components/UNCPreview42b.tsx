@@ -52,11 +52,11 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         <div className="flex mt-2">
           {/* Left fields */}
           <div className="flex-1">
-            <Row label="Đơn vị trả tiền:" value={data.donViTraTien} />
-            <Row label="Số tài khoản:" value={data.soTaiKhoanTra} />
+            <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
+            <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
-            <Row label="Đơn vị nhận tiền:" value={data.donViNhanTien} />
-            <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} />
+            <Row label="Đơn vị nhận tiền:" value={data.donViNhanTien} noBorder />
+            <Row label="Số tài khoản:" value={data.soTaiKhoanNhan} noBorder />
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
               <span className="flex-1 overflow-hidden" style={{ 

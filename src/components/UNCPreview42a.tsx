@@ -76,7 +76,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} />
             {/* Last row */}
-            <div className="border-b border-black px-2 py-[6px] flex items-baseline">
+            <div className="px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
               <span className="flex-1 overflow-hidden" style={{ 
                 borderBottom: data.noiDungThanhToan ? 'none' : '1px dotted black',
