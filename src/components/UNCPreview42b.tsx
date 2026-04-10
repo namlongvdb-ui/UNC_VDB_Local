@@ -59,7 +59,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         {/* Main body */}
         <div className="relative mt-2">
           {/* Right panel - fixed size */}
-          <div className="absolute top-0 right-0 w-[170px] h-[200px] border border-black" style={{ zIndex: 1 }}>
+          <div className="absolute top-0 right-0 w-[170px] h-[220px] border border-black" style={{ zIndex: 1 }}>
             <div className="border-b border-black px-3 py-[8px] flex flex-col justify-center" style={{ height: '50%' }}>
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
               <p className="text-center text-[11px] mt-2">
