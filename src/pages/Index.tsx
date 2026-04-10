@@ -72,16 +72,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-muted print:bg-white print:p-0">
       {/* Header */}
-      <header className="bg-primary text-primary-foreground px-6 py-3 flex items-center justify-between print:hidden">
-        <div className="flex items-center gap-3">
-          <div>
-            <h1 className="text-lg font-bold">Ủy nhiệm chi - VDB</h1>
-            <div className="overflow-hidden max-w-[300px]">
-              <p className="text-xs text-primary-foreground/70 whitespace-nowrap animate-marquee">
-                Copyright by Trần Nam Long VDB-Chi nhánh Khu vực Bắc Đông Bắc, PGD Cao Bằng
-              </p>
-            </div>
+      <header className="bg-primary text-primary-foreground px-6 py-3 flex flex-col items-center print:hidden">
+        <div className="text-center">
+          <h1 className="text-lg font-bold uppercase">ỦY NHIỆM CHI - VDB</h1>
+          <div className="overflow-hidden max-w-[500px] mx-auto">
+            <p className="text-xs text-primary-foreground/70 whitespace-nowrap animate-marquee">
+              Copyright by Trần Nam Long VDB-Chi nhánh Khu vực Bắc Đông Bắc, PGD Cao Bằng
+            </p>
           </div>
+        </div>
+        <div className="flex items-center justify-between w-full mt-2">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="bg-primary-foreground/10">
               <TabsTrigger value="42a" className="text-primary-foreground/70 data-[state=active]:text-primary data-[state=active]:bg-primary-foreground">
@@ -92,7 +92,6 @@ const Index = () => {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-        </div>
         <div className="flex items-center gap-2">
           <Button onClick={handleExportPDF} variant="secondary" size="sm" className="gap-2">
             <FileDown className="w-4 h-4" />
@@ -102,6 +101,7 @@ const Index = () => {
             <Printer className="w-4 h-4" />
             In biểu mẫu
           </Button>
+        </div>
         </div>
       </header>
 
