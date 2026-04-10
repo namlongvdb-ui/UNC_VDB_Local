@@ -1,6 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { formatNumber } from "@/lib/numberToWords";
 import { numberToVietnameseWords } from "@/lib/numberToWords";
+import {
+  getSavedBeneficiaries,
+  saveBeneficiary,
+  deleteBeneficiary,
+  getUNCHistory,
+  saveUNCHistory,
+  deleteUNCHistory,
+  type SavedBeneficiary,
+  type UNCHistoryEntry,
+} from "@/lib/storage";
+import { Save, Trash2, Clock, UserPlus, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 
 export interface UNCFormData {
   soUNC: string;
@@ -51,6 +62,18 @@ export const useUNCForm = () => {
 };
 
 const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
+  const [beneficiaries, setBeneficiaries] = useState<SavedBeneficiary[]>([]);
+  const [history, setHistory] = useState<UNCHistoryEntry[]>([]);
+  const [showBeneficiaries, setShowBeneficiaries] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+
+  useEffect(() => {
+    if (activeTab === "42b") {
+      setBeneficiaries(getSavedBeneficiaries());
+      setHistory(getUNCHistory());
+    }
+  }, [activeTab]);
+
   const update = (field: keyof UNCFormData, value: string) => {
     onChange({ ...data, [field]: value });
   };
@@ -68,17 +91,76 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
     });
   };
 
+  const handleSaveBeneficiary = () => {
+    if (!data.donViNhanTien) return;
+    saveBeneficiary({
+      name: data.donViNhanTien,
+      donViNhanTien: data.donViNhanTien,
+      soTaiKhoanNhan: data.soTaiKhoanNhan,
+      taiNHKB: data.taiNHKB,
+      tinhTP: data.tinhTP,
+    });
+    setBeneficiaries(getSavedBeneficiaries());
+  };
+
+  const handleSelectBeneficiary = (b: SavedBeneficiary) => {
+    onChange({
+      ...data,
+      donViNhanTien: b.donViNhanTien,
+      soTaiKhoanNhan: b.soTaiKhoanNhan,
+      taiNHKB: b.taiNHKB,
+      tinhTP: b.tinhTP,
+    });
+  };
+
+  const handleDeleteBeneficiary = (id: string) => {
+    deleteBeneficiary(id);
+    setBeneficiaries(getSavedBeneficiaries());
+  };
+
+  const handleSaveHistory = () => {
+    saveUNCHistory(data);
+    setHistory(getUNCHistory());
+  };
+
+  const handleLoadHistory = (entry: UNCHistoryEntry) => {
+    onChange(entry.data);
+  };
+
+  const handleDeleteHistory = (id: string) => {
+    deleteUNCHistory(id);
+    setHistory(getUNCHistory());
+  };
+
+  const formatDate = (iso: string) => {
+    const d = new Date(iso);
+    return `${d.getDate().toString().padStart(2, "0")}/${(d.getMonth() + 1).toString().padStart(2, "0")}/${d.getFullYear()} ${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
+  };
+
   return (
     <div className="space-y-5">
       {activeTab === "42b" && (
-        <button
-          type="button"
-          onClick={applyDefault42b}
-          className="w-full rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
-        >
-          Mặc định (PGD Cao Bằng)
-        </button>
+        <>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={applyDefault42b}
+              className="flex-1 rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+            >
+              Mặc định (PGD Cao Bằng)
+            </button>
+            <button
+              type="button"
+              onClick={handleSaveHistory}
+              className="rounded-md bg-accent text-accent-foreground px-3 py-2 text-sm font-medium hover:bg-accent/80 transition-colors flex items-center gap-1"
+              title="Lưu lịch sử"
+            >
+              <Save className="w-4 h-4" />
+            </button>
+          </div>
+        </>
       )}
+
       {/* Thông tin chung */}
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
@@ -129,9 +211,57 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
 
       {/* Đơn vị nhận tiền */}
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-        <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
-          Đơn vị nhận tiền
-        </h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
+            Đơn vị nhận tiền
+          </h3>
+          {activeTab === "42b" && (
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={handleSaveBeneficiary}
+                className="text-xs px-2 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors flex items-center gap-1"
+                title="Lưu đơn vị hưởng"
+              >
+                <UserPlus className="w-3 h-3" /> Lưu
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowBeneficiaries(!showBeneficiaries)}
+                className="text-xs px-2 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors flex items-center gap-1"
+              >
+                DS đã lưu {showBeneficiaries ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Saved beneficiaries list */}
+        {activeTab === "42b" && showBeneficiaries && beneficiaries.length > 0 && (
+          <div className="rounded-md border border-border bg-muted/50 max-h-[200px] overflow-y-auto">
+            {beneficiaries.map((b) => (
+              <div
+                key={b.id}
+                className="flex items-center justify-between px-3 py-2 hover:bg-muted cursor-pointer border-b border-border last:border-b-0 text-xs"
+              >
+                <div className="flex-1 min-w-0" onClick={() => handleSelectBeneficiary(b)}>
+                  <div className="font-medium truncate">{b.donViNhanTien}</div>
+                  <div className="text-muted-foreground truncate">TK: {b.soTaiKhoanNhan} | {b.taiNHKB}</div>
+                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleDeleteBeneficiary(b.id); }}
+                  className="ml-2 text-destructive hover:text-destructive/80 flex-shrink-0"
+                >
+                  <Trash2 className="w-3 h-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {activeTab === "42b" && showBeneficiaries && beneficiaries.length === 0 && (
+          <p className="text-xs text-muted-foreground italic">Chưa có đơn vị hưởng nào được lưu.</p>
+        )}
+
         <div>
           <label className={labelClass}>Tên đơn vị</label>
           <input className={inputClass} placeholder="Nhập tên đơn vị nhận tiền..." value={data.donViNhanTien} onChange={(e) => update("donViNhanTien", e.target.value)} />
@@ -178,6 +308,66 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
           />
         </div>
       </div>
+
+      {/* Lịch sử UNC - only 42b */}
+      {activeTab === "42b" && (
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+          <button
+            type="button"
+            onClick={() => setShowHistory(!showHistory)}
+            className="flex items-center justify-between w-full text-left"
+          >
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide flex items-center gap-2">
+              <Clock className="w-4 h-4" /> Lịch sử UNC ({history.length})
+            </h3>
+            {showHistory ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+          </button>
+
+          {showHistory && (
+            <div className="max-h-[300px] overflow-y-auto space-y-0 rounded-md border border-border">
+              {history.length === 0 ? (
+                <p className="text-xs text-muted-foreground italic p-3">Chưa có lịch sử UNC.</p>
+              ) : (
+                history.map((entry) => (
+                  <div
+                    key={entry.id}
+                    className="flex items-center justify-between px-3 py-2 hover:bg-muted border-b border-border last:border-b-0 text-xs"
+                  >
+                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => handleLoadHistory(entry)}>
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">UNC #{entry.soUNC || "---"}</span>
+                        <span className="text-muted-foreground">{formatDate(entry.createdAt)}</span>
+                      </div>
+                      <div className="text-muted-foreground truncate">
+                        {entry.donViNhanTien} — {formatNumber(entry.soTienBangSo)}đ
+                      </div>
+                      {entry.noiDungThanhToan && (
+                        <div className="text-muted-foreground truncate italic">{entry.noiDungThanhToan}</div>
+                      )}
+                    </div>
+                    <div className="flex gap-1 ml-2 flex-shrink-0">
+                      <button
+                        onClick={() => handleLoadHistory(entry)}
+                        className="text-primary hover:text-primary/80"
+                        title="Tải lại"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteHistory(entry.id)}
+                        className="text-destructive hover:text-destructive/80"
+                        title="Xóa"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
