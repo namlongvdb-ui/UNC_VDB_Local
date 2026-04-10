@@ -60,29 +60,20 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
             {/* Special row with 2 fields */}
             <div className="border-b border-black px-2 py-[6px] flex items-baseline">
               <span className="whitespace-nowrap">Tại NH, KB:</span>
-              <span className="flex-1 min-w-0 break-words" style={{ 
-                borderBottom: data.taiNHKB ? 'none' : '1px dotted black',
-                marginLeft: '2px', minHeight: '14px'
-              }}>
-                {data.taiNHKB && <span className="font-medium">{data.taiNHKB}</span>}
+              <span className="flex-1 min-w-0 break-words" style={{ marginLeft: '2px', minHeight: '14px' }}>
+                {data.taiNHKB ? <span className="font-medium">{data.taiNHKB}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(20)}</span>}
               </span>
               <span className="whitespace-nowrap mx-1">,tỉnh, TP:</span>
-              <span className="flex-1 min-w-0 break-words" style={{ 
-                borderBottom: data.tinhTP ? 'none' : '1px dotted black',
-                marginLeft: '2px', minHeight: '14px'
-              }}>
-                {data.tinhTP && <span className="font-medium">{data.tinhTP}</span>}
+              <span className="flex-1 min-w-0 break-words" style={{ marginLeft: '2px', minHeight: '14px' }}>
+                {data.tinhTP ? <span className="font-medium">{data.tinhTP}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(20)}</span>}
               </span>
             </div>
             <Row label="Số tiền bằng chữ:" value={data.soTienBangChu} noBorder />
             {/* Last row */}
             <div className="px-2 py-[6px]">
               <span className="whitespace-nowrap">Nội dung thanh toán:</span>
-              <span className="break-words" style={{ 
-                borderBottom: data.noiDungThanhToan ? 'none' : '1px dotted black',
-                marginLeft: '2px', minHeight: '14px', lineHeight: '18px', wordBreak: 'break-word'
-              }}>
-                {data.noiDungThanhToan && <span className="font-medium">{data.noiDungThanhToan}</span>}
+              <span className="break-words" style={{ marginLeft: '2px', minHeight: '14px', lineHeight: '18px', wordBreak: 'break-word' }}>
+                {data.noiDungThanhToan ? <span className="font-medium">{data.noiDungThanhToan}</span> : <span style={{ letterSpacing: '1px' }}>{".".repeat(50)}</span>}
               </span>
             </div>
           </div>
