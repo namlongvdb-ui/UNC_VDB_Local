@@ -11,7 +11,8 @@ import {
   type SavedBeneficiary,
   type UNCHistoryEntry,
 } from "@/lib/storage";
-import { Save, Trash2, Clock, UserPlus, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
+import { Save, Trash2, Clock, UserPlus, ChevronDown, ChevronUp, RotateCcw, BookUser, Building2 } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 export interface UNCFormData {
   soUNC: string;
