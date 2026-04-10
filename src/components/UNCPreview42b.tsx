@@ -51,7 +51,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         {/* Main body */}
         <div className="flex mt-2">
           {/* Left fields */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0 overflow-hidden">
             <Row label="Đơn vị trả tiền:" value={data.donViTraTien} noBorder />
             <Row label="Số tài khoản:" value={data.soTaiKhoanTra} noBorder />
             <Row label="Tại NHPT tỉnh, TP:" value={data.taiNHPT} />
@@ -86,7 +86,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
           </div>
 
           {/* Right panel */}
-          <div className="w-[170px] border border-black ml-2 flex flex-col">
+          <div className="w-[170px] flex-shrink-0 border border-black ml-2 flex flex-col">
             <div className="flex-1 border-b border-black px-3 py-[8px] flex flex-col justify-center">
               <p className="font-bold text-center text-[12px]">NHPT GHI</p>
               <p className="text-center text-[11px] mt-2">
