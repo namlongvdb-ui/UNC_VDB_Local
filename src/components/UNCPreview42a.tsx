@@ -112,7 +112,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         </div>
 
         {/* Signature row 1 */}
-        <div className="flex border-t border-black">
+        <div className="flex">
           <div className="flex-1 border-r border-black py-2 px-2">
             <p className="font-bold text-[12px] text-center">Đơn vị trả tiền</p>
             <div className="flex justify-around mt-1">
