@@ -42,7 +42,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
 
         {/* Title row */}
         <div className="flex items-start -mt-1">
-          <div className="w-[80px] flex items-center justify-center">
+          <div className="w-[80px] ml-[10mm] flex items-center justify-center">
             <img src={vdbLogo} alt="VDB" className="w-[80px] h-[80px] object-contain" />
           </div>
           <div className="flex-1 text-center pt-0.5">
