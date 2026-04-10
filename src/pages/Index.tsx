@@ -105,7 +105,7 @@ const Index = () => {
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
             Nhập thông tin
           </h2>
-          <InputPanel data={data} onChange={setData} />
+          <InputPanel data={data} onChange={setData} activeTab={activeTab} />
         </div>
 
         {/* Right: Preview */}
