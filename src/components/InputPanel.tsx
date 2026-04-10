@@ -66,6 +66,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
   const [beneficiaries, setBeneficiaries] = useState<SavedBeneficiary[]>([]);
   const [history, setHistory] = useState<UNCHistoryEntry[]>([]);
   const [showBeneficiaries, setShowBeneficiaries] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
