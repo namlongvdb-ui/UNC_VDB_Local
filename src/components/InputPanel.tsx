@@ -68,19 +68,23 @@ const InputPanel = ({ data, onChange }: InputPanelProps) => {
           <label className={labelClass}>Số UNC</label>
           <input className={inputClass} placeholder="Nhập số UNC..." value={data.soUNC} onChange={(e) => update("soUNC", e.target.value)} />
         </div>
-        <div className="grid grid-cols-3 gap-3">
-          <div>
-            <label className={labelClass}>Ngày</label>
-            <input className={inputClass} placeholder="DD" value={data.ngay} onChange={(e) => update("ngay", e.target.value)} />
-          </div>
-          <div>
-            <label className={labelClass}>Tháng</label>
-            <input className={inputClass} placeholder="MM" value={data.thang} onChange={(e) => update("thang", e.target.value)} />
-          </div>
-          <div>
-            <label className={labelClass}>Năm</label>
-            <input className={inputClass} placeholder="YYYY" value={data.nam} onChange={(e) => update("nam", e.target.value)} />
-          </div>
+        <div>
+          <label className={labelClass}>Ngày lập (dd/mm/yyyy)</label>
+          <input
+            className={inputClass}
+            placeholder="dd/mm/yyyy"
+            value={`${data.ngay}/${data.thang}/${data.nam}`}
+            onChange={(e) => {
+              const raw = e.target.value.replace(/[^0-9/]/g, '');
+              const parts = raw.split('/');
+              onChange({
+                ...data,
+                ngay: parts[0]?.slice(0, 2) || '',
+                thang: parts[1]?.slice(0, 2) || '',
+                nam: parts[2]?.slice(0, 4) || '',
+              });
+            }}
+          />
         </div>
       </div>
 
