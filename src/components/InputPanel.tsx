@@ -235,7 +235,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
                     <BookUser className="w-3 h-3" /> DS đã lưu
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[360px] sm:w-[400px] flex flex-col">
+                <SheetContent side="right" className="w-[360px] sm:w-[400px] flex flex-col overflow-hidden">
                   <SheetHeader>
                     <SheetTitle className="flex items-center gap-2">
                       <Building2 className="w-5 h-5 text-primary" />
