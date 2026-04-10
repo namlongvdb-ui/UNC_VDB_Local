@@ -157,7 +157,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
             <button
               type="button"
               onClick={handleSaveHistory}
-              className="rounded-md bg-accent text-accent-foreground px-3 py-2 text-sm font-medium hover:bg-accent/80 transition-colors flex items-center gap-1"
+              className="rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-1"
               title="Lưu lịch sử"
             >
               <Save className="w-4 h-4" />
