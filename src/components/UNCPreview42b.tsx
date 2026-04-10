@@ -15,7 +15,7 @@ const Row = ({ label, value, noBorder }: { label: string; value: string; noBorde
   <div className={`${noBorder ? '' : 'border-b border-black'} px-2 py-[6px] flex`}>
     <span className="whitespace-nowrap flex-shrink-0">{label}</span>
     {value ? (
-      <span className="ml-[2px] font-medium flex-1" style={{ lineHeight: '18px', wordBreak: 'break-word' }}>
+      <span className="ml-[2px] font-medium flex-1 min-w-0" style={{ lineHeight: '18px', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
         {value}
       </span>
     ) : (
