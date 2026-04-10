@@ -113,6 +113,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
       taiNHKB: b.taiNHKB,
       tinhTP: b.tinhTP,
     });
+    setSheetOpen(false);
   };
 
   const handleDeleteBeneficiary = (id: string) => {
