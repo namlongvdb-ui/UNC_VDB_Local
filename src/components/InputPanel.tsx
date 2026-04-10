@@ -68,6 +68,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
   const [showBeneficiaries, setShowBeneficiaries] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [historySheetOpen, setHistorySheetOpen] = useState(false);
 
   useEffect(() => {
     if (activeTab === "42b") {
