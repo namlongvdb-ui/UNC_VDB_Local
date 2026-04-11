@@ -85,6 +85,10 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
     "w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
   const labelClass = "text-sm font-medium text-foreground mb-1 block";
 
+  const handleResetForm = () => {
+    onChange(initialData);
+  };
+
   const applyDefault42b = () => {
     onChange({
       ...data,
