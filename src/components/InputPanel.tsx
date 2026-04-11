@@ -263,15 +263,17 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
             className={inputClass}
             placeholder="dd/mm/yyyy"
             value={(() => {
-              const parts = [data.ngay, data.thang, data.nam].filter(Boolean);
-              if (parts.length === 0) return '';
-              let result = data.ngay;
-              if (data.ngay.length === 2 || data.thang) result += '/' + data.thang;
-              if (data.thang.length === 2 || data.nam) result += '/' + data.nam;
-              return result;
+              const raw = data.ngay + data.thang + data.nam;
+              if (!raw) return '';
+              let formatted = '';
+              for (let i = 0; i < raw.length; i++) {
+                if (i === 2 || i === 4) formatted += '/';
+                formatted += raw[i];
+              }
+              return formatted;
             })()}
             onChange={(e) => {
-              const raw = e.target.value.replace(/[^0-9]/g, '');
+              const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, 8);
               const ngay = raw.slice(0, 2);
               const thang = raw.slice(2, 4);
               const nam = raw.slice(4, 8);
