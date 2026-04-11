@@ -240,7 +240,7 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
           <button
             type="button"
             onClick={handleResetForm}
-            className="rounded-md bg-destructive text-destructive-foreground px-3 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors"
+            className="w-full rounded-md bg-destructive text-destructive-foreground px-3 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors"
             title="Làm mới form (Ctrl+N)"
           >
             New
