@@ -235,6 +235,19 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         </>
       )}
 
+      {activeTab === "42a" && (
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={handleResetForm}
+            className="rounded-md bg-destructive text-destructive-foreground px-3 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors"
+            title="Làm mới form (Ctrl+N)"
+          >
+            New
+          </button>
+        </div>
+      )}
+
       {/* Thông tin chung */}
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wide">
