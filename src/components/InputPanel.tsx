@@ -259,25 +259,26 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         </div>
         <div>
           <label className={labelClass}>Ngày lập (dd/mm/yyyy)</label>
-          <input
-            className={inputClass}
-            placeholder="dd/mm/yyyy"
-            value={
-              data.ngay || data.thang || data.nam
-                ? `${data.ngay}/${data.thang}/${data.nam}`
-                : ''
-            }
-            onChange={(e) => {
-              const raw = e.target.value.replace(/[^0-9/]/g, '');
-              const parts = raw.split('/');
-              onChange({
-                ...data,
-                ngay: parts[0]?.slice(0, 2) || '',
-                thang: parts[1]?.slice(0, 2) || '',
-                nam: parts[2]?.slice(0, 4) || '',
-              });
-            }}
-          />
+          <div className="grid grid-cols-3 gap-2">
+            <div>
+              <input className={inputClass} placeholder="Ngày" maxLength={2} value={data.ngay} onChange={(e) => {
+                const v = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
+                onChange({ ...data, ngay: v });
+              }} />
+            </div>
+            <div>
+              <input className={inputClass} placeholder="Tháng" maxLength={2} value={data.thang} onChange={(e) => {
+                const v = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
+                onChange({ ...data, thang: v });
+              }} />
+            </div>
+            <div>
+              <input className={inputClass} placeholder="Năm" maxLength={4} value={data.nam} onChange={(e) => {
+                const v = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+                onChange({ ...data, nam: v });
+              }} />
+            </div>
+          </div>
         </div>
       </div>
 
