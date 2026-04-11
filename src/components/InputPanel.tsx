@@ -262,7 +262,11 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
           <input
             className={inputClass}
             placeholder="dd/mm/yyyy"
-            value={`${data.ngay}/${data.thang}/${data.nam}`}
+            value={
+              data.ngay || data.thang || data.nam
+                ? `${data.ngay}/${data.thang}/${data.nam}`
+                : ''
+            }
             onChange={(e) => {
               const raw = e.target.value.replace(/[^0-9/]/g, '');
               const parts = raw.split('/');
