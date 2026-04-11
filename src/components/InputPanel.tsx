@@ -151,20 +151,20 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
       {activeTab === "42b" && (
         <>
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={applyDefault42b}
-              className="rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
-            >
-              Mặc định (PGD Cao Bằng)
-            </button>
-            <button
+             <button
               type="button"
               onClick={handleResetForm}
               className="rounded-md bg-destructive text-destructive-foreground px-3 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors"
               title="Làm mới form (Ctrl+N)"
             >
               New
+            </button>
+            <button
+              type="button"
+              onClick={applyDefault42b}
+              className="rounded-md bg-primary text-primary-foreground px-3 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+            >
+              Mặc định (PGD Cao Bằng)
             </button>
             <button
               type="button"
