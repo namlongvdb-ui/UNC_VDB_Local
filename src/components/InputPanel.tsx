@@ -407,7 +407,13 @@ const InputPanel = ({ data, onChange, activeTab }: InputPanelProps) => {
         </div>
         <div>
           <label className={labelClass}>Số tiền bằng chữ</label>
-          <input className={inputClass} placeholder="Nhập số tiền bằng chữ..." value={data.soTienBangChu} onChange={(e) => update("soTienBangChu", e.target.value)} />
+          <input
+            className={`${inputClass} bg-muted cursor-not-allowed text-muted-foreground`}
+            placeholder="Tự động tạo từ số tiền..."
+            value={data.soTienBangChu}
+            readOnly
+            tabIndex={-1}
+          />
         </div>
         <div>
           <label className={labelClass}>Nội dung thanh toán</label>
