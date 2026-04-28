@@ -40,7 +40,7 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
 
         <div className="flex items-start -mt-1">
-          <div className="w-[180px] ml-[5mm] flex items-start justify-center -mt-8">
+          <div className="w-[180px] ml-[5mm] flex items-start justify-center -mt-8" style={{ marginTop: 'calc(-2rem - 10mm)' }}>
             <img src={vdbLogo} alt="VDB" className="w-[180px] h-[180px] object-contain" />
           </div>
           <div className="flex-1 text-center pt-0.5">
