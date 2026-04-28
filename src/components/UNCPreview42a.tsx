@@ -40,8 +40,8 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
 
         <div className="flex items-start -mt-1">
-          <div className="w-[120px] ml-[5mm] flex items-center justify-center">
-            <img src={vdbLogo} alt="VDB" className="w-[120px] h-[120px] object-contain" />
+          <div className="w-[140px] ml-[5mm] flex items-center justify-center">
+            <img src={vdbLogo} alt="VDB" className="w-[140px] h-[140px] object-contain" />
           </div>
           <div className="flex-1 text-center pt-0.5">
             <h1 className="text-[18px] font-bold tracking-[3px]">ỦY NHIỆM CHI</h1>
