@@ -41,7 +41,8 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
         src={vdbWatermark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140mm] h-[140mm] object-contain opacity-10"
+        className="pointer-events-none select-none absolute left-1/2 -translate-x-1/2 w-[140mm] h-[140mm] object-contain opacity-10"
+        style={{ top: '25mm' }}
       />
       <div className="relative px-[15mm] py-[10mm] h-full flex flex-col">
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
