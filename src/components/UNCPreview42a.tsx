@@ -1,4 +1,5 @@
 import vdbLogo from "@/assets/vdb-logo.png";
+import vdbWatermark from "@/assets/vdb-watermark.png";
 import { formatNumber } from "@/lib/numberToWords";
 import type { UNCFormData } from "./InputPanel";
 
@@ -33,10 +34,16 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
 
   return (
     <div
-      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none"
+      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
       style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
-      <div className="px-[15mm] py-[10mm] h-full flex flex-col">
+      <img
+        src={vdbWatermark}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140mm] h-[140mm] object-contain opacity-10"
+      />
+      <div className="relative px-[15mm] py-[10mm] h-full flex flex-col">
         <div className="text-right text-[11px] italic">Mẫu số: C42a-NHPT</div>
 
         <div className="flex items-start -mt-1">
