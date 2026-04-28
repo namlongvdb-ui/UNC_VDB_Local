@@ -192,7 +192,6 @@ const UNCPreview42a = ({ data }: UNCPreview42aProps) => {
           </div>
         </div>
       </div>
-      </div>
     </div>
   );
 };
