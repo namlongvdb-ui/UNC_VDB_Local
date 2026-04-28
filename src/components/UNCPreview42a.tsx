@@ -1,4 +1,4 @@
-import vdbLogo from "@/assets/vdb-logo.jpg";
+import vdbLogo from "@/assets/vdb-logo.png";
 import { formatNumber } from "@/lib/numberToWords";
 import type { UNCFormData } from "./InputPanel";
 
