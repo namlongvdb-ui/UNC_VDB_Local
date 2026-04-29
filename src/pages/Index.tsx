@@ -65,9 +65,8 @@ const Index = () => {
 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = 210;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+      // Đặt ảnh khít với khổ A4 (210x297mm) để bản PDF giống hệt preview
+      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
       const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
       pdf.save(fileName);
     } finally {
@@ -124,8 +123,8 @@ const Index = () => {
               Xem trước biểu mẫu — {activeTab === "42a" ? "C42a-NHPT (Doanh nghiệp)" : "C42b-NHPT (Nội bộ đơn vị)"}
             </span>
           </div>
-          <div className="flex justify-center pb-8 print:pb-0">
-            <div className="origin-top" style={{ transform: "scale(0.75)" }}>
+          <div className="flex justify-center pb-8 print:pb-0 print:block">
+            <div className="origin-top print-scale-wrapper" style={{ transform: "scale(0.75)" }}>
               <div ref={previewRef}>
                 {activeTab === "42a" ? (
                   <UNCPreview42a data={data} />
