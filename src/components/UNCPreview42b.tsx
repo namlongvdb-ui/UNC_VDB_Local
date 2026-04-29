@@ -41,7 +41,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
         src={vdbWatermark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-1/2 -translate-x-1/2 w-[160mm] h-[140mm] opacity-10"
+        className="pointer-events-none select-none absolute left-1/2 -translate-x-1/2 w-[160mm] h-[140mm] opacity-20"
         style={{ top: '40mm' }}
       />
       <div className="relative px-[15mm] py-[10mm] h-full flex flex-col">
