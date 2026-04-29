@@ -105,11 +105,36 @@ All colors MUST be HSL.
 }
 
 @media print {
-  body {
+  @page {
+    size: A4;
     margin: 0;
-    padding: 0;
+  }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    width: 210mm;
+    height: 297mm;
   }
   .print\:hidden {
     display: none !important;
+  }
+  /* Hủy scale 0.75 của preview wrapper khi in */
+  .print-scale-wrapper {
+    transform: none !important;
+  }
+  /* Đảm bảo trang UNC in đúng kích thước A4, không lề thừa */
+  .unc-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  /* In đúng màu nền/watermark */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }

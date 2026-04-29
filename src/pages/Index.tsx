@@ -124,8 +124,8 @@ const Index = () => {
               Xem trước biểu mẫu — {activeTab === "42a" ? "C42a-NHPT (Doanh nghiệp)" : "C42b-NHPT (Nội bộ đơn vị)"}
             </span>
           </div>
-          <div className="flex justify-center pb-8 print:pb-0">
-            <div className="origin-top" style={{ transform: "scale(0.75)" }}>
+          <div className="flex justify-center pb-8 print:pb-0 print:block">
+            <div className="origin-top print-scale-wrapper" style={{ transform: "scale(0.75)" }}>
               <div ref={previewRef}>
                 {activeTab === "42a" ? (
                   <UNCPreview42a data={data} />
