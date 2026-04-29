@@ -34,7 +34,7 @@ const UNCPreview42b = ({ data }: UNCPreview42bProps) => {
 
   return (
     <div
-      className="w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
+      className="unc-page w-[210mm] h-[297mm] bg-white text-black mx-auto shadow-lg print:shadow-none relative overflow-hidden"
       style={{ fontFamily: "'Times New Roman', serif", fontSize: "13px" }}
     >
       <img

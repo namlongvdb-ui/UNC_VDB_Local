@@ -65,9 +65,8 @@ const Index = () => {
 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = 210;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+      // Đặt ảnh khít với khổ A4 (210x297mm) để bản PDF giống hệt preview
+      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
       const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
       pdf.save(fileName);
     } finally {
