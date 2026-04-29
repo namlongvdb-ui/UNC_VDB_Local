@@ -43,15 +43,26 @@ const Index = () => {
     if (!previewRef.current) return;
     const el = previewRef.current;
 
+    // A4 ở 96 CSS DPI: 210mm = 793.7px, 297mm = 1122.5px
+    const A4_WIDTH_PX = 794;
+    const A4_HEIGHT_PX = 1123;
+
     const clone = el.cloneNode(true) as HTMLElement;
     clone.style.position = 'fixed';
     clone.style.left = '-9999px';
     clone.style.top = '0';
     clone.style.transform = 'none';
-    clone.style.width = '210mm';
-    clone.style.height = '297mm';
+    clone.style.width = `${A4_WIDTH_PX}px`;
+    clone.style.height = `${A4_HEIGHT_PX}px`;
     clone.style.zIndex = '-1';
     document.body.appendChild(clone);
+
+    // Ép phần tử con (.unc-page) cũng đúng kích thước A4 px để khớp tỉ lệ
+    const inner = clone.querySelector('.unc-page') as HTMLElement | null;
+    if (inner) {
+      inner.style.width = `${A4_WIDTH_PX}px`;
+      inner.style.height = `${A4_HEIGHT_PX}px`;
+    }
 
     try {
       const canvas = await html2canvas(clone, {
@@ -59,13 +70,15 @@ const Index = () => {
         useCORS: true,
         backgroundColor: "#ffffff",
         logging: false,
-        width: clone.offsetWidth,
-        height: clone.offsetHeight,
+        width: A4_WIDTH_PX,
+        height: A4_HEIGHT_PX,
+        windowWidth: A4_WIDTH_PX,
+        windowHeight: A4_HEIGHT_PX,
       });
 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      // Đặt ảnh khít với khổ A4 (210x297mm) để bản PDF giống hệt preview
+      // Map khít A4 (210x297mm) — tỉ lệ px→mm đúng bằng preview
       pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
       const fileName = `UNC_${activeTab === "42a" ? "C42a" : "C42b"}_${data.soUNC || "draft"}.pdf`;
       pdf.save(fileName);
